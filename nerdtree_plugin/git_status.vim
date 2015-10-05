@@ -124,13 +124,8 @@ endfunction
 " FUNCTION: g:NERDTreeGetGitStatusPrefix(path) {{{2
 " return the indicator of the path
 " Args: path
-let s:GitStatusCacheTimeExpiry = 2
-let s:GitStatusCacheTime = 0
 function! g:NERDTreeGetGitStatusPrefix(path)
-    if localtime() - s:GitStatusCacheTime > s:GitStatusCacheTimeExpiry
-        let s:GitStatusCacheTime = localtime()
-        call g:NERDTreeGitStatusRefresh()
-    endif
+    call g:NERDTreeGitStatusRefresh()
     let l:pathStr = a:path.str()
     let l:cwd = b:NERDTreeRoot.path.str() . a:path.Slash()
     if nerdtree#runningWindows()
